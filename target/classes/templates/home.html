@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style_generic.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+
+    <title>Home</title>
+  </head>
+  <body> 
+    
+    <div class="main_body">
+        <video autoplay muted loop id="myVideo">
+            <source src="/videos/video-1.mp4" type="video/mp4">
+          </video>
+    </div>
+     
+    
+    <header class="clear">
+      <nav>
+        <p id="logo">TRVL ASSIST</p>
+        <ul class="nav_links">
+          <li><a href="/home">Home</a></li>
+          <li sec:authorize="isAuthenticated()"><a href="/insurances">Insurances</a>
+          <li><a href="">Insurance S</a></li>
+          <li><a href="">Insurance P</a></li>
+          <li sec:authorize="isAnonymous()"><a href="/login" id="sign_in">Sign In</a>
+          <li sec:authorize="isAnonymous()"><a href="/register" id="sign_up">Sign Up</a>
+          <li sec:authorize="isAuthenticated()"><a href="/logout">Log Out</a>
+        </ul>
+      </nav>
+    </header>
+
+        
+
+        
+
+        <div class="container">
+
+            <div class="middle">
+                <div class="content">
+                <h1>ADVENTURE AWAITS </h1>
+                <h2>What are you waiting for?</h2>
+                 <div class="content-1">
+                     <span><a href="" class="first">Get Started</a></span>
+                     <span><a href="" class="second">Watch Trailer</a></span>
+                 </div>
+                </div>
+
+                <div class="clear"></div>
+                <div class="middle-2">
+                
+                </div>
+
+               
+
+                
+
+                
+
+
+            </div>
+
+            <div class="footer"></div>
+                
+            
+
+        </div>
+  </body>
+</html>

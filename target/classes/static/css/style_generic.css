@@ -1,0 +1,162 @@
+*{
+    margin: auto 0;
+    
+}
+
+.clear{
+    clear: left;
+}
+
+nav
+{
+    position:-webkit-sticky;
+    position:sticky;
+    top: 0;
+    display: flex;
+    background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+    width: auto;
+    
+}
+
+#logo{
+    flex: 3;
+    float: left;
+    padding: 20px;
+    color: whitesmoke;
+    order: 1;
+    font-size: 30px;
+    text-decoration: none;
+        
+}
+
+.nav_links {
+    list-style: none;
+    order: 2;
+    
+}
+
+
+.nav_links li{
+display: inline-block;
+padding:  40px;
+font-size: 20px;
+
+
+}
+
+.nav_links li a{
+    transition: all 0.3s ease 0s;
+    color: whitesmoke; 
+    text-decoration: none;
+    }  
+
+.nav_links li a:hover{
+    background-color:whitesmoke;
+    color: black;
+    border: 1px solid;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+     border-radius: 5px;
+    }
+
+ 
+    #myVideo {
+       
+        object-fit: cover;
+        width: 100%;
+        height: 1000px;
+        position: fixed;
+        z-index: -1;
+ }
+
+.middle {
+    
+   
+   
+    position:relative;
+    margin-top: 50px;
+    height: 600px;
+    margin-left: 120px;
+    margin-right: 120px;
+    padding-top: 100px;
+    width: auto;
+    background-color: rgb(26, 23, 23,0.2);
+    
+}
+
+.middle h1,h2{
+    position: relative;
+    text-align: center;
+    color: white;
+    
+}
+
+.middle h1{
+    padding-top: 50px;
+    font-size: 100px;
+}
+
+.middle h2{
+    position: relative;
+    padding-top: 50px;
+    font-size:30px;
+}
+
+.content-1{
+    text-align: center;
+    padding: 30px;
+
+}
+
+.content-1 span a
+{ 
+    font-size: 20px;
+    padding: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin: 20px;
+    border: 1px solid white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+span .first{
+    color: white;
+      
+}
+span .first:hover{
+   font-size: 21px;
+   transition: all 0.3s ease 0s;
+   opacity: 75%;
+}
+
+span .second{
+color: black;
+background-color: white;
+}
+
+span .second:hover{
+    font-size: 21px;
+    transition: all 0.3s ease 0s;
+    opacity: 75%;
+ }
+
+ .middle-2{
+     width: 100%;
+     height: 1000px;
+     background-color: white;
+     margin-top: 500px;
+     margin-bottom: 500px;
+ }
+
+ .footer{
+     margin: 600px;
+     height: 200px;
+     width: auto;
+     
+ }
+
+
+
