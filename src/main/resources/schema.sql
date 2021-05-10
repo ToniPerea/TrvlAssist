@@ -11,3 +11,13 @@ CREATE TABLE IF NOT EXISTS trvl_assist.user(
     `active`     BOOLEAN        NOT NULL,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE IF NOT EXISTS trvl_assist.product(
+    `id`          INT         NOT NULL AUTO_INCREMENT,
+    `name`        VARCHAR(13) NOT NULL,
+    `price`       FLOAT       NOT NULL,
+    `description` TEXT        NOT NULL,
+    `quantity`    INT         NOT NULL,
+    `image`       VARCHAR(256)        ,
+    PRIMARY KEY (id)
+);

@@ -1,9 +1,9 @@
 package  com.antonio.TrvlAssist.controller;
 
+import com.antonio.TrvlAssist.model.Product;
 import  com.antonio.TrvlAssist.service.MainService;
 import  com.antonio.TrvlAssist.service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,20 +15,21 @@ public class InsurancesController {
 
     private final MainService mainService;
     private final UserService userService;
+
     @GetMapping
-        public String getInsurances(Model model){
-            model.addAttribute("user", userService.getAuthenticatedUser());
-            return "insurances";
+    public String showShop(Model model) {
+
+        model.addAttribute("user", userService.getAuthenticatedUser());
+        model.addAttribute("products", mainService.listAllProducts());
+        model.addAttribute("producto", new Product());
+        return "insurances";
     }
-    // @GetMapping
-    // public String showInsurances(Model model) {
 
-    //     // model.addAttribute("user", userService.getAuthenticatedUser());
-    //     // model.addAttribute("insurances", mainService.listAllProducts());
-    //     // return "insurances";
-    // }
-
-
-
-
+    @PostMapping("/crearProducto")
+    public String crearProducto2(Model modelo, Product g){
+        System.out.println("He recibido" + g.toString());
+        modelo.addAttribute("producto", new Product());
+        mainService.saveProduct(g);
+        return "redirect:/home";
+    }
 }

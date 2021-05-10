@@ -21,17 +21,24 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String firstName;
     private String lastName;
     private String username;
     private String password;
     private boolean active;
+
     @Enumerated(EnumType.STRING)
     @Column(length = 25)
     private Role role;
+
     @Enumerated(EnumType.STRING)
     @Column(length = 25)
     private Gender gender;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @Nullable
+    private Collection<Transaction> transactions;
 
 
     public Long getId() {
@@ -69,6 +76,28 @@ public class User {
 
     public Gender getGender() {
         return gender;
+    }
+
+    public void addTransaction(Transaction transaction) {
+
+        assert transactions != null;
+
+        if (transactions.contains(transaction))
+            return;
+
+        transactions.add(transaction);
+        transaction.setUser(this);
+    }
+
+    public void removeTransaction(Transaction transaction) {
+
+        assert transactions != null;
+
+        if (!transactions.contains(transaction))
+            return;
+
+        transactions.remove(transaction);
+        transaction.setUser(null);
     }
 
 

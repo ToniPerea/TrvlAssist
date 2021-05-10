@@ -51,6 +51,122 @@
 				th:text="${user.getRole()}"></span>
 			</div>
 		  </div>
+
+			<div class="col-xl-4 mb-4" th:each="product : ${products}">
+				<div class="card border-bottom-primary shadow w-auto h-auto py-2">
+
+					<!-- Product Link -->
+					<a th:href="@{/products/{id}(id=${product.id})}" style="text-decoration: none !important">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+
+								<div class="col-xl">
+
+									<!-- Product Name -->
+									<div class="h4 font-weight-bold mb-3 ml-2 text-blue"
+										 th:text="${product.name}">Name
+									</div>
+
+									<!-- Product Price -->
+									<div class="h5 font-weight-bold mb-3 text-gray-800 ml-2"
+										 th:text="${product.price}+'€'">Price
+									</div>
+
+									<!-- Product Unavailable (Qty=0) -->
+									<div class="h5 font-weight-bold mb-3 text-warning ml-2"
+										 th:if="${product.quantity} == 0">Unavailable
+									</div>
+
+
+									<div class="mb-3 ml-2" th:unless="${product.quantity} == 0">
+										<span class="h5 font-weight-bold text-info"
+													  th:text="${'In Stock (' + product.quantity + ')'}">Quantity
+										</span>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+
+
+
+			<div sec:authorize="hasRole('ROLE_ADMIN')">
+				<form th:action="@{/insurances/crearProducto}" th:object="${producto}" enctype="multipart/form-data" method="post">
+					<!--<input type="text" th:field="${producto.content}"/>-->
+					<div class="col-sm-6 mb-3 mb-sm-0">
+						<input th:field="${producto.name}" type="text" class="form-control form-control-user"
+							   id="name" placeholder="Name" maxlength="12" required/>
+					</div>
+
+					<div class="col-sm-6 mb-3 mb-sm-0">
+						<input th:field="${producto.price}" type="text" class="form-control form-control-user"
+							   id="price" placeholder="Price" maxlength="12" required/>
+					</div>
+
+					<div class="col-sm-6 mb-3 mb-sm-0">
+						<input th:field="${producto.description}" type="text" class="form-control form-control-user"
+							   id="description" placeholder="Description" maxlength="12" required/>
+					</div>
+
+					<div class="col-sm-6 mb-3 mb-sm-0">
+						<input th:field="${producto.quantity}" type="text" class="form-control form-control-user"
+							   id="quantity" placeholder="Quantity" maxlength="12" required/>
+					</div>
+
+					<div class="col-sm-6 mb-3 mb-sm-0">
+						<input th:field="${producto.image}" type="text" class="form-control form-control-user"
+							   id="image" placeholder="Image URL" maxlength="12" required/>
+					</div>
+
+					<button type="submit" class="btn btn-primary btn-user btn-block">
+						Add Product
+					</button>
+
+
+				</form>
+			</div>
+
+
+
+			<!--<div sec:authorize="hasRole('ROLE_ADMIN')">-->
+				<!--<form action="#"  th:action="@{/save}" th:object="${p}" enctype="multipart/form-data" method="post">
+					<div class="form-group row">
+						<div class="col-sm-6 mb-3 mb-sm-0">
+							<input th:field="*{name}" type="text" class="form-control form-control-user"
+								   id="name" placeholder="name" maxlength="12" required/>
+						</div>
+						<div class="col-sm-6">
+							<input th:field="*{price}" type="text" class="form-control form-control-user"
+								   id="price" placeholder="price" maxlength="12" required/>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-6 mb-3 mb-sm-0">
+							<input th:field="*{description}" type="text" class="form-control form-control-user"
+								   id="description" placeholder="description" maxlength="12" required/>
+						</div>
+						<div class="col-sm-6 mb-3 mb-sm-0">
+							<input th:field="*{quantity}" type="text" class="form-control form-control-user"
+								   id="quantity" placeholder="quantity" maxlength="12" required/>
+						</div>
+						<div class="col-sm-6 mb-3 mb-sm-0">
+							<input th:field="*{image}" type="text" class="form-control form-control-user"
+								   id="image" placeholder="image" maxlength="12" required/>
+						</div>
+
+					</div>
+
+					<button type="submit" class="btn btn-primary btn-user btn-block">
+						Add Product
+					</button>
+				</form>-->
+			<!-- </div> -->
+
+
+
 			<div class="footer"></div>
 				
 			

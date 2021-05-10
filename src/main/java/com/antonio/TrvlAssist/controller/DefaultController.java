@@ -3,15 +3,19 @@ package  com.antonio.TrvlAssist.controller;
 import  com.antonio.TrvlAssist.model.User;
 import  com.antonio.TrvlAssist.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@AllArgsConstructor
-@Controller
-public class DefaultController {
 
+@Controller
+@AllArgsConstructor
+@RequestMapping("/")
+public class DefaultController {
+    @Autowired
     private final UserService userService;
+
 
     @GetMapping("/")
     public String getIndex() {
@@ -22,12 +26,13 @@ public class DefaultController {
 
     @GetMapping("/home")
     public String getHome(){
+        System.out.println("Ensenio home");
         return "home";
     }
 
     @GetMapping("/login")
     public String showLoginForm() {
-
+        System.out.println("Ensenio login");
         return "login";
     }
 
@@ -51,5 +56,9 @@ public class DefaultController {
             return "redirect:/register?error=true";
         }
     }
+
+
+
+
 
 }

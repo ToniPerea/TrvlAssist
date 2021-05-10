@@ -30,6 +30,9 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                     .antMatchers("/login", "/register").permitAll()
+                .antMatchers("/insurances/**", "/greeting/**", "/").hasAnyRole(USER, ADMIN)
+
+                .antMatchers("/greeting").hasAnyRole(USER, ADMIN)
                 .and()
                     .formLogin()
                         .loginPage("/login")
@@ -37,6 +40,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                         .passwordParameter("password")
                         .defaultSuccessUrl("/insurances", true) // Default URL login
                         .failureUrl("/login?error=true")
+
+
                 .and()
                     .logout()
                         .logoutSuccessHandler(new MyLogoutSuccessHandler())
