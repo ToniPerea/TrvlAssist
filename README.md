@@ -2,7 +2,7 @@
 
 ## Setup
 To start this project you simply need to run:
- 
+
 ```bash
 mvn clean && mvn spring-boot:run
 ```

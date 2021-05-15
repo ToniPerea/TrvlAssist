@@ -3,85 +3,81 @@
 
 <head>
 
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
 
-
-	<title>Login</title>
-
-
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+    <title>Login</title>
 
 
-	<link rel="stylesheet" href="/css/style_generic.css" />
-	<link rel="stylesheet" href="/css/style_login.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+            crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="/css/style_generic.css"/>
+    <link rel="stylesheet" href="/css/style_login.css"/>
 
 </head>
 
 <body>
-	<header class="clear">
-		<nav>
-		  <p id="logo">TRVL ASSIST</p>
-		  <ul class="nav_links">
-			<li><a href="/home">Home</a></li>
-			<li sec:authorize="isAuthenticated()"><a href="/insurances">Insurances</a>
-			<li><a href="">Insurance S</a></li>
-			<li><a href="">Insurance P</a></li>
-			<li sec:authorize="isAnonymous()"><a href="/login" id="sign_in">Sign In</a>
-			<li sec:authorize="isAnonymous()"><a href="/register" id="sign_up">Sign Up</a>
-			<li sec:authorize="isAuthenticated()"><a href="/logout">Log Out</a>
-		  </ul>
-		</nav>
-	  </header>
 
-	<div class="container">
+<div th:replace="fragments/navbar.html :: navbar-fragment"></div>
 
 
 
+<!-- He borrado el header nav -->
 
 
+<div class="container">
 
-		<div class="center clear">
+</div>
 
-			<img src="/img/sign up.jpg" alt="" style="height: 100% ;">
+<div class="card container shadow shadow-sm mt-5 mb-2">
+    <h2 class="alert simple-heading text-center animate__animated animate__bounceInDown mt-3 mb-3" style="color:black;">Login Here</h2>
 
-			<div class="sign-up">
+    <hr class="p-0 m-0 mt-2 mb-2">
+    <div class="row card-body ">
 
-				<form class="user" th:action="@{/login}" method="post">
-					<div th:if="${param.error}">
-						<p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
-					</div>
-					<div th:if="${param.logout}">
-						<p class="text-warning">You have been logged out.</p>
-					</div>
-					<div class="text-center" th:if="${param.newPass}">
-						<p class="h5 text-blue">Password Successfully Changed</p>
-						<p class="text-gray-700">Please login with new password</p>
-					</div>
-					<div class="form-group">
-						<input type="text" class="form-control form-control-user"
-							   id="username" placeholder="Username" name="username" required/>
-					</div>
-					<div class="form-group">
-						<input type="password" class="form-control form-control-user"
-							   id="password" placeholder="Password" name="password" required/>
-					</div>
-					<button type="submit" value="login" class="btn btn-primary btn-user btn-block">
-						Login
-					</button>
-				</form>
-			</div>
+        <div class="mx-auto ">
+            <form th:action="@{/login}" th:method="post" class="m-3 col-lg-10 mx-auto card p-4">
+                <div th:if="${param.error}">
 
+                    <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+                </div>
+                <div th:if="${param.logout}">
+                    <p class="text-warning">You have been logged out.</p>
+                </div>
 
+                <div class="text-center" th:if="${param.newPass}">
+                    <p class="h5 text-blue">Password Successfully Changed</p>
+                    <p class="text-gray-700">Please login with new password</p>
+                </div>
+                <div class="form-group mt-2 mb-3">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control form-control-user"
+                           id="username" placeholder="Username" name="username" required/>
+                </div>
+                <div class="form-group mt-3 mb-1">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control form-control-user"
+                           id="password" placeholder="Password" name="password" required/>
+                </div>
+                <button type="submit" value="login" class="btn btn-primary btn-user btn-block mt-4 mb-4">
+                    Login
+                </button>
+                <a href="/register" class="mt-2 btn btn-light btn-block">Don't have an account? Register here</a>
+                <hr>
+            </form>
+        </div>
+    </div>
+</div>
 
-
-		</div>
-	</div>
 
 </body>
 

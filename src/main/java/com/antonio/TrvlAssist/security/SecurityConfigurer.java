@@ -31,11 +31,12 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                     .antMatchers("/login", "/register").permitAll()
                 .antMatchers("/insurances/**", "/greeting/**", "/").hasAnyRole(USER, ADMIN)
+                .antMatchers("/shop/**").hasAnyRole(USER, ADMIN)
 
                 .antMatchers("/greeting").hasAnyRole(USER, ADMIN)
                 .and()
                     .formLogin()
-                        .loginPage("/login")
+                        .loginPage("/login").permitAll()
                         .usernameParameter("username")
                         .passwordParameter("password")
                         .defaultSuccessUrl("/insurances", true) // Default URL login

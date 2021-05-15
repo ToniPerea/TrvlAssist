@@ -17,22 +17,9 @@
 			<source src="/videos/video-1.mp4" type="video/mp4">
 		  </video>
 	</div>
-	 
-	
-	<header class="clear">
-		<nav>
-		  <p id="logo">TRVL ASSIST</p>
-		  <ul class="nav_links">
-			<li><a href="/home">Home</a></li>
-			<li sec:authorize="isAuthenticated()"><a href="/insurances">Insurances</a>
-			<li><a href="">Insurance S</a></li>
-			<li><a href="">Insurance P</a></li>
-			<li sec:authorize="isAnonymous()"><a href="/login" id="sign_in">Sign In</a>
-			<li sec:authorize="isAnonymous()"><a href="/register" id="sign_up">Sign Up</a>
-			<li sec:authorize="isAuthenticated()"><a href="/logout">Log Out</a>
-		  </ul>
-		</nav>
-	  </header>
+
+
+	<div th:replace="fragments/navbar.html :: navbar-fragment"></div>
 
 		
 
@@ -84,6 +71,19 @@
 										</span>
 									</div>
 
+									<img th:src="${product.image}" class="mx-auto" />
+
+
+									<div class="h5 font-weight-bold mb-3 text-warning ml-2"
+										 th:if="${product.quantity} != 0">
+
+										<form th:action="@{shop/cart/{id}(id=${product.id})}" th:method="post">
+											<button class="btn btn-primary btn-user btn-block" >
+												Add to Cart
+											</button>
+										</form>
+									</div>
+
 								</div>
 							</div>
 						</div>
@@ -98,27 +98,27 @@
 					<!--<input type="text" th:field="${producto.content}"/>-->
 					<div class="col-sm-6 mb-3 mb-sm-0">
 						<input th:field="${producto.name}" type="text" class="form-control form-control-user"
-							   id="name" placeholder="Name" maxlength="12" required/>
+							   id="name" placeholder="Name" maxlength="64" required/>
 					</div>
 
 					<div class="col-sm-6 mb-3 mb-sm-0">
-						<input th:field="${producto.price}" type="text" class="form-control form-control-user"
-							   id="price" placeholder="Price" maxlength="12" required/>
+						<input th:field="${producto.price}" type="number" class="form-control form-control-user"
+							   id="price" placeholder="Price"  required/>
 					</div>
 
 					<div class="col-sm-6 mb-3 mb-sm-0">
 						<input th:field="${producto.description}" type="text" class="form-control form-control-user"
-							   id="description" placeholder="Description" maxlength="12" required/>
+							   id="description" placeholder="Description" maxlength="128" required/>
 					</div>
 
 					<div class="col-sm-6 mb-3 mb-sm-0">
-						<input th:field="${producto.quantity}" type="text" class="form-control form-control-user"
-							   id="quantity" placeholder="Quantity" maxlength="12" required/>
+						<input th:field="${producto.quantity}" type="number" class="form-control form-control-user"
+							   id="quantity" placeholder="Quantity"  required/>
 					</div>
 
 					<div class="col-sm-6 mb-3 mb-sm-0">
 						<input th:field="${producto.image}" type="text" class="form-control form-control-user"
-							   id="image" placeholder="Image URL" maxlength="12" required/>
+							   id="image" placeholder="Image URL" maxlength="256" required/>
 					</div>
 
 					<button type="submit" class="btn btn-primary btn-user btn-block">

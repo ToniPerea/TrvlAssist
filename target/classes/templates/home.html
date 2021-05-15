@@ -18,22 +18,9 @@
             <source src="/videos/video-1.mp4" type="video/mp4">
           </video>
     </div>
-     
-    
-    <header class="clear">
-      <nav>
-        <p id="logo">TRVL ASSIST</p>
-        <ul class="nav_links">
-          <li><a href="/home">Home</a></li>
-          <li sec:authorize="isAuthenticated()"><a href="/insurances">Insurances</a>
-          <li><a href="">Insurance S</a></li>
-          <li><a href="">Insurance P</a></li>
-          <li sec:authorize="isAnonymous()"><a href="/login" id="sign_in">Sign In</a>
-          <li sec:authorize="isAnonymous()"><a href="/register" id="sign_up">Sign Up</a>
-          <li sec:authorize="isAuthenticated()"><a href="/logout">Log Out</a>
-        </ul>
-      </nav>
-    </header>
+
+
+    <div th:replace="fragments/navbar.html :: navbar-fragment"></div>
 
         
 

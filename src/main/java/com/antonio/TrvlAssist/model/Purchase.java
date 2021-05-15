@@ -1,11 +1,15 @@
 package com.antonio.TrvlAssist.model;
 
+
 import lombok.*;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Entity
@@ -13,17 +17,30 @@ import java.util.Objects;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Transaction {
+public class Purchase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(columnDefinition="TEXT")
+    @Lob
+    private String products = "";
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
-    private Product product;
 
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -34,9 +51,15 @@ public class Transaction {
     @Column(columnDefinition = "DATETIME")
     private final LocalDateTime date = LocalDateTime.now();
 
+    public void addProduct(Product p){
 
-
-
+        String aux = new StringBuilder()
+                .append(products)
+                .append("\n")
+                .append(p.toString())
+                .toString();
+        products = aux;
+    }
 
 
     public String getOnlyDate() {
@@ -49,45 +72,20 @@ public class Transaction {
         return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss"));
     }
 
-    public void setProduct(Product product) {
+    /*public void setTransaction(Transaction transaction) {
 
-        Product oldProduct = this.product;
+        Transaction oldProduct = this.transaction;
 
-        if (Objects.equals(product, oldProduct))
-            return;
-
-        this.product = product;
-
-        if (oldProduct!=null)
-            oldProduct.removeTransaction(null);
-
-        if (product!=null)
-            product.addTransaction(this);
-    }
-
-    public void setUser(User user) {
-
-        User oldUser = this.user;
-
-        if (Objects.equals(user, oldUser))
-            return;
-
-        this.user = user;
-
-        if (oldUser!=null)
-            oldUser.removeTransaction(null);
-
-        if (user!=null)
-            user.addTransaction(this);
-    }
+    }*/
 
 
 
     @Override
     public String toString() {
 
-        return "Stock " + id + ": [product = " + product.getName() + ", price = " + product.getPrice() +
+        return "Stock " + id + ": [transaction = "  +
                 ", user = " + user.getName() + ", date = " + date + "]";
     }
 
 }
+

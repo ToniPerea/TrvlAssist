@@ -38,7 +38,7 @@ public class DefaultController {
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
-
+        System.out.println("[showRegistrationForm]");
         model.addAttribute("user", new User());
         return "register";
     }
@@ -47,14 +47,19 @@ public class DefaultController {
     public String registerUser(@ModelAttribute("user") User user) {
 
         if (userService.isNewUser(user.getUsername())) {
-
+            System.out.println("NEW USERRR");
             userService.registerUser(user);
             return "redirect:/login";
         }
         else {
-
-            return "redirect:/register?error=true";
+            System.out.println("User is created");
+            return "redirect:/login";
         }
+    }
+
+    @GetMapping("/confirmation")
+    public String showConfirmation(Model model){
+        return "confirmation";
     }
 
 

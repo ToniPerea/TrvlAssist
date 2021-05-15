@@ -140,9 +140,6 @@ public class Product {
 
     @Override
     public String toString() {
-
-        return "Product " + id + ": [name = " + name  + ", price = " + price +
-                ", quantity = " + quantity +
-                ", description = " + description.substring(0, Math.min(description.length(), 10)) + "]";
+        return id + "," + name + "," + price + "," +  quantity + "," + description;
     }
 }
