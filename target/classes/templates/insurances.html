@@ -76,14 +76,15 @@
 
                 </div>
 
-                <div class="h5 d-flex justify-content-center font-weight-bold mt-2 mb-1 text-warning ml-2"
-                  th:if="${product.quantity} != 0">
+                <div class="h5 d-flex justify-content-center font-weight-bold mt-2 mb-1 text-warning ml-2">
                   <br />
                   <form th:action="@{shop/cart/{id}(id=${product.id})}" th:method="post">
                     <button class="btn btn-primary btn-user btn-block  ">
                       Add to Cart
                     </button>
-                    <button sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-danger btn-user btn-block  ">
+                    <button sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-danger btn-user btn-block" 
+                    th:action="@{shop/cart/{id}(id=${product.id})}" th:method="delete"
+                    >
                       Delete from DB
                     </button>
                   </form>

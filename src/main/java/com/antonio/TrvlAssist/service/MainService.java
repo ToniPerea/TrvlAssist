@@ -85,6 +85,11 @@ public class MainService {
         transactionRepository.deleteById(id);
     }
 
+    public void delete(Long id){
+        System.out.println("[mainService][removeProductFromDatabase]");
+        productRepository.deleteById(id);
+    }
+
 
     // Tengo que meter los productos del carrito en la tabla purchase
     public void addShoppingCartToOrdersConfirmation(List<Transaction> miCarrito, User s){

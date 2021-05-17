@@ -30,6 +30,14 @@ public class InsurancesController {
         System.out.println("He recibido" + g.toString());
         modelo.addAttribute("producto", new Product());
         mainService.saveProduct(g);
-        return "redirect:/home";
+        return "redirect:/insurances";
+    }
+
+
+    @DeleteMapping("/product/{id}")
+    public String deleteProduct(Model modelo, @PathVariable Long id){
+        System.out.println("Removing product: ");
+        mainService.delete(id);
+        return "redirect:/insurances";
     }
 }
