@@ -1,177 +1,190 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="/css/style_generic.css" />
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style_generic.css" />
+    <link rel="stylesheet" href="/css/insurance_page.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+      crossorigin="anonymous"
+    ></script>
 
-	<title>Home</title>
+    <title>Home</title>
   </head>
-  <body> 
-	
-	<div class="main_body">
-		<video autoplay muted loop id="myVideo">
-			<source src="/videos/video-1.mp4" type="video/mp4">
-		  </video>
+  <body>
+    <div class="main_body">
+      <video autoplay muted loop id="myVideo">
+        <source src="/videos/video-1.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <div th:replace="fragments/navbar.html :: navbar-fragment"></div>
+
+    <div class="container_insurance">
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">Info about User</h5>
+          <label for="username" style="font-weight: bold">Full Name:</label>
+          <span th:text="${user.getName()}" id="username"></span> <br />
+          <label for="user_status" style="font-weight: bold">Logged as:</label>
+          <span th:text="${user.getRole()}" id="user_status"></span>
+        </div>
+      </div>
+
+      <div
+        class="col-sm-6 col-md-4 each_product"
+        th:each="product : ${products}"
+      >
+        <div class="product_card border-bottom-primary shadow w-auto h-auto">
+          <!-- Product Link -->
+          <a
+            th:href="@{/products/{id}(id=${product.id})}"
+            style="text-decoration: none !important"
+          >
+            <div class="card-body">
+              <div class="row no-gutters">
+                <div class="">
+                  <!-- Product Name -->
+                  <div
+                    class="h4 font-weight-bold mb-3 ml-2 text-blue"
+                    th:text="${product.name}"
+                  >
+                    Name
+                  </div>
+
+                  <!-- Product Price -->
+                  <div
+                    class="h5 font-weight-bold mb-3 text-gray-800 ml-2"
+                    th:text="${product.price}+'€'"
+                  >
+                    Price
+                  </div>
+
+                  <!-- Product Unavailable (Qty=0) -->
+                  <div
+                    class="h5 font-weight-bold mb-3 text-warning ml-2"
+                    th:if="${product.quantity} == 0"
+                  >
+                    Unavailable
+                  </div>
+
+                  <div class="mb-3 ml-2" th:unless="${product.quantity} == 0">
+                    <span
+                      class="h5 font-weight-bold text-info"
+                      th:text="${'In Stock (' + product.quantity + ')'}"
+                      >Quantity
+                    </span>
+                  </div>
+
+                  <img th:src="${product.image}" class="mx-auto" />
+
+                  <div
+                    class="h5 font-weight-bold mb-3 text-warning ml-2"
+                    th:if="${product.quantity} != 0"
+                  >
+                    <br />
+                    <form
+                      th:action="@{shop/cart/{id}(id=${product.id})}"
+                      th:method="post"
+                    >
+                      <button class="btn btn-primary btn-user btn-block  ">
+                        Add to Cart
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+<br>
+      
+      <div class="clearBoth" sec:authorize="hasRole('ROLE_ADMIN')">
+        <div class="admin_stuff" >
+        <form class="formA"
+          th:action="@{/insurances/crearProducto}"
+          th:object="${producto}"
+          enctype="multipart/form-data"
+          method="post"
+        >
+          <!--<input type="text" th:field="${producto.content}"/>-->
+          <div class="col-sm-6 mb-3 mb-sm-0">
+            <input
+              th:field="${producto.name}"
+              type="text"
+              class=""
+              id="name"
+              placeholder="Name"
+              maxlength="64"
+              required
+            />
+          </div>
+
+          <div class="col-sm-6 mb-3 mb-sm-0">
+            <input
+              th:field="${producto.price}"
+              type="number"
+              class=""
+              id="price"
+              placeholder="Price"
+              required
+            />
+          </div>
+
+          <div class="col-sm-6 mb-3 mb-sm-0">
+            <input
+              th:field="${producto.description}"
+              type="text"
+              class=""
+              id="description"
+              placeholder="Description"
+              maxlength="128"
+              required
+            />
+          </div>
+
+          <div class="col-sm-6 mb-3 mb-sm-0">
+            <input
+              th:field="${producto.quantity}"
+              type="number"
+              class=""
+              id="quantity"
+              placeholder="Quantity"
+              required
+            />
+          </div>
+
+          <div class="col-sm-6 mb-3 mb-sm-0">
+            <input
+              th:field="${producto.image}"
+              type="text"
+              class=""
+              id="image"
+              placeholder="Image URL"
+              maxlength="256"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-user btn-block">
+            Add Product
+          </button>
+        </form>
 	</div>
+      </div>
+	
 
-
-	<div th:replace="fragments/navbar.html :: navbar-fragment"></div>
-
-		
-
-		
-
-		<div class="container">
-
-		  <div class="card" style="width: 18rem;">
-		   
-			<div class="card-body">
-			  <h5 class="card-title">Info</h5>
-			  <span class="mr-2 d-none d-lg-inline"
-				th:text="${user.getName()}"></span>,
-				All yours insurances: 
-				<span class="mr-2 d-none d-lg-inline"
-				th:text="${user.getRole()}"></span>
-			</div>
-		  </div>
-
-			<div class="col-xl-4 mb-4" th:each="product : ${products}">
-				<div class="card border-bottom-primary shadow w-auto h-auto py-2">
-
-					<!-- Product Link -->
-					<a th:href="@{/products/{id}(id=${product.id})}" style="text-decoration: none !important">
-						<div class="card-body">
-							<div class="row no-gutters align-items-center">
-
-								<div class="col-xl">
-
-									<!-- Product Name -->
-									<div class="h4 font-weight-bold mb-3 ml-2 text-blue"
-										 th:text="${product.name}">Name
-									</div>
-
-									<!-- Product Price -->
-									<div class="h5 font-weight-bold mb-3 text-gray-800 ml-2"
-										 th:text="${product.price}+'€'">Price
-									</div>
-
-									<!-- Product Unavailable (Qty=0) -->
-									<div class="h5 font-weight-bold mb-3 text-warning ml-2"
-										 th:if="${product.quantity} == 0">Unavailable
-									</div>
-
-
-									<div class="mb-3 ml-2" th:unless="${product.quantity} == 0">
-										<span class="h5 font-weight-bold text-info"
-													  th:text="${'In Stock (' + product.quantity + ')'}">Quantity
-										</span>
-									</div>
-
-									<img th:src="${product.image}" class="mx-auto" />
-
-
-									<div class="h5 font-weight-bold mb-3 text-warning ml-2"
-										 th:if="${product.quantity} != 0">
-
-										<form th:action="@{shop/cart/{id}(id=${product.id})}" th:method="post">
-											<button class="btn btn-primary btn-user btn-block">
-												Add to Cart
-											</button>
-										</form>
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-			</div>
-
-
-
-			<div sec:authorize="hasRole('ROLE_ADMIN')">
-				<form th:action="@{/insurances/crearProducto}" th:object="${producto}" enctype="multipart/form-data" method="post">
-					<!--<input type="text" th:field="${producto.content}"/>-->
-					<div class="col-sm-6 mb-3 mb-sm-0">
-						<input th:field="${producto.name}" type="text" class="form-control form-control-user"
-							   id="name" placeholder="Name" maxlength="64" required/>
-					</div>
-
-					<div class="col-sm-6 mb-3 mb-sm-0">
-						<input th:field="${producto.price}" type="number" class="form-control form-control-user"
-							   id="price" placeholder="Price"  required/>
-					</div>
-
-					<div class="col-sm-6 mb-3 mb-sm-0">
-						<input th:field="${producto.description}" type="text" class="form-control form-control-user"
-							   id="description" placeholder="Description" maxlength="128" required/>
-					</div>
-
-					<div class="col-sm-6 mb-3 mb-sm-0">
-						<input th:field="${producto.quantity}" type="number" class="form-control form-control-user"
-							   id="quantity" placeholder="Quantity"  required/>
-					</div>
-
-					<div class="col-sm-6 mb-3 mb-sm-0">
-						<input th:field="${producto.image}" type="text" class="form-control form-control-user"
-							   id="image" placeholder="Image URL" maxlength="256" required/>
-					</div>
-
-					<button type="submit" class="btn btn-primary btn-user btn-block">
-						Add Product
-					</button>
-
-
-				</form>
-			</div>
-
-
-
-			<!--<div sec:authorize="hasRole('ROLE_ADMIN')">-->
-				<!--<form action="#"  th:action="@{/save}" th:object="${p}" enctype="multipart/form-data" method="post">
-					<div class="form-group row">
-						<div class="col-sm-6 mb-3 mb-sm-0">
-							<input th:field="*{name}" type="text" class="form-control form-control-user"
-								   id="name" placeholder="name" maxlength="12" required/>
-						</div>
-						<div class="col-sm-6">
-							<input th:field="*{price}" type="text" class="form-control form-control-user"
-								   id="price" placeholder="price" maxlength="12" required/>
-						</div>
-					</div>
-					<div class="form-group row">
-						<div class="col-sm-6 mb-3 mb-sm-0">
-							<input th:field="*{description}" type="text" class="form-control form-control-user"
-								   id="description" placeholder="description" maxlength="12" required/>
-						</div>
-						<div class="col-sm-6 mb-3 mb-sm-0">
-							<input th:field="*{quantity}" type="text" class="form-control form-control-user"
-								   id="quantity" placeholder="quantity" maxlength="12" required/>
-						</div>
-						<div class="col-sm-6 mb-3 mb-sm-0">
-							<input th:field="*{image}" type="text" class="form-control form-control-user"
-								   id="image" placeholder="image" maxlength="12" required/>
-						</div>
-
-					</div>
-
-					<button type="submit" class="btn btn-primary btn-user btn-block">
-						Add Product
-					</button>
-				</form>-->
-			<!-- </div> -->
-
-
-
-			<div class="footer"></div>
-				
-			
-
-		</div>
+      <div class="footer"></div>
+    </div>
   </body>
-
 </html>

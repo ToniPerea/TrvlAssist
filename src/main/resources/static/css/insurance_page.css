@@ -1,0 +1,53 @@
+.container_insurance{
+    background-color: whitesmoke;
+     height: auto 0; 
+     width: auto 0; 
+     margin: 50px;
+     border-radius: 10px;
+     float: left;
+     }
+
+     
+
+     .each_product{
+        float: left;
+        padding: 30px;
+        transition:250ms;
+        
+     }
+
+     .product_card{
+         
+        border-radius: 15px;
+        border: 1px none;
+        background-color: white;
+        
+     }
+
+     .each_product:hover{
+       
+        transform: scale(1.1);
+     }
+
+     
+
+     img{
+         width: 300px;
+         height: 250px;
+         margin-left: auto;
+         margin-right: auto;
+  
+         
+     }
+
+     
+.formA{
+    
+   align-content: center;
+}
+     
+     
+     
+.clearBoth{
+    clear: both;
+}
