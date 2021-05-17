@@ -26,7 +26,7 @@
   <div th:replace="fragments/navbar.html :: navbar-fragment"></div>
 
   <div class="container_insurance">
-    <div th:if="${user.role} == ADMIN" class="d-flex justify-content-center ">
+    <div sec:authorize="hasRole('ROLE_ADMIN')" class="d-flex justify-content-center ">
       <div class="card" style="width: 18rem">
         <div class="card-body">
           <h5 class="card-title">Info about User</h5>
@@ -83,7 +83,7 @@
                     <button class="btn btn-primary btn-user btn-block  ">
                       Add to Cart
                     </button>
-                    <button class="btn btn-danger btn-user btn-block  ">
+                    <button sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-danger btn-user btn-block  ">
                       Delete from DB
                     </button>
                   </form>
@@ -99,14 +99,14 @@
 
 
 
-    <div class="card container shadow shadow-sm mt-5 mb-2">
+    <div sec:authorize="hasRole('ROLE_ADMIN')" class="card container shadow shadow-sm mt-5 mb-2">
       <h2 class="alert simple-heading text-center animate__animated animate__bounceInDown mt-3 mb-3"
         style="color:black;">
         Admin Panel for Adding</h2>
 
       <hr class="p-0 m-0 mt-2 mb-2">
-      <div class="row card-body ">
-        <div class="clearBoth" sec:authorize="hasRole('ROLE_ADMIN')">
+      <div  class="row card-body ">
+        <div class="clearBoth" >
           <div class="admin_stuff">
             <form class="formA" th:action="@{/insurances/crearProducto}" th:object="${producto}"
               enctype="multipart/form-data" method="post">
