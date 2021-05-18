@@ -125,37 +125,40 @@
       <div  class="row card-body ">
         <div class="clearBoth" >
           <div class="admin_stuff">
-            <form class="formA" th:action="@{/insurances/crearProducto}" th:object="${producto}"
-              enctype="multipart/form-data" method="post">
-              <!--<input type="text" th:field="${producto.content}"/>-->
-              <div class="form-group col-sm-6 mb-3 mb-sm-0">
-                <input th:field="${producto.name}" type="text" class="" id="name" placeholder="Name" maxlength="64"
-                  required />
-              </div>
 
-              <div class="form-group col-sm-6 mb-3 mb-sm-0">
-                <input th:field="${producto.price}" type="number" class="" id="price" placeholder="Price" required />
-              </div>
 
-              <div class="form-group col-sm-6 mb-3 mb-sm-0">
-                <input th:field="${producto.description}" type="text" class="" id="description"
-                  placeholder="Description" maxlength="128" required />
+            <form class="formA" th:action="@{/insurances/crearProducto}" th:object="${producto}" enctype="multipart/form-data" method="post">
+              <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input th:field="${producto.name}" type="text" class="form-control" id="name" placeholder="Name" maxlength="64" required />
               </div>
-
-              <div class="form-group col-sm-6 mb-3 mb-sm-0">
-                <input th:field="${producto.quantity}" type="number" class="" id="quantity" placeholder="Quantity"
-                  required />
+              <div class="mb-3">
+                <label class="form-label">Price</label>
+                <input th:field="${producto.price}" type="text" class="form-control" id="price" placeholder="Price" required />
               </div>
-
-              <div class="form-group col-sm-6 mb-3 mb-sm-0">
-                <input th:field="${producto.image}" type="text" class="" id="image" placeholder="Image URL"
-                  maxlength="256" required />
+          
+              <div class="mb-3">
+                <label class="form-label">Description</label>
+                <input th:field="${producto.description}" type="text" class="form-control" id="description" placeholder="Description" required />
               </div>
-
+          
+              <div class="mb-3">
+                <label class="form-label">Quantify</label>
+                <input th:field="${producto.quantity}" type="number" class="form-control" id="quantify" placeholder="Quantify" required />
+              </div>
+          
+              <div class="mb-3">
+                <label class="form-label">Image URL</label>
+                <input th:field="${producto.image}" type="text" class="form-control" id="image" placeholder="Image URL" required />
+              </div>
+              
               <button type="submit" class="btn btn-primary btn-user btn-block">
                 Add Product
               </button>
             </form>
+    
+        
+
           </div>
         </div>
 
@@ -167,7 +170,7 @@
 
   <div th:replace="fragments/footer.html :: footer-fragment"></div>
 
-  </div>
+
 </body>
 
 </html>
