@@ -107,6 +107,10 @@ public class MainService {
     }
 
 
+    public void removeProductFromDB(Long id){
+        //ProductRepository pr = productRepository.findById()
+    }
+
 
     
 }

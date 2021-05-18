@@ -18,6 +18,8 @@ import java.util.List;
 @RequestMapping("/shop")
 public class ShopController {
 
+    
+
     @Autowired
     private final UserService userService;
     @Autowired
@@ -82,4 +84,7 @@ public class ShopController {
 
         return "redirect:/confirmation";
     }
+
+
+
 }

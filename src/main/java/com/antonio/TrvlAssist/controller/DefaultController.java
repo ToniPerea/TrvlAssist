@@ -63,6 +63,17 @@ public class DefaultController {
     }
 
 
+    // Cuidado del copy&paste 
+    // las funciones no se pueden llamar igual
+
+    @GetMapping("/products/{id}")
+    public String showProduct(Model model, @PathVariable Long id){
+        System.out.println("Showing product");
+        return "product";
+    }
+
+
+
 
 
 

@@ -36,7 +36,7 @@ public class InsurancesController {
 
     @DeleteMapping("/product/{id}")
     public String deleteProduct(Model modelo, @PathVariable Long id){
-        System.out.println("Removing product: ");
+        System.out.println("============================>Removing product: ");
         mainService.delete(id);
         return "redirect:/insurances";
     }
