@@ -62,7 +62,7 @@
 
                 <!-- Product Unavailable (Qty=0) -->
                 <div class="h5 font-weight-bold mb-3 text-warning ml-2" th:if="${product.quantity} == 0">
-                  Unavailable
+                  Out of Stock
                 </div>
 
                 <div class="mb-3 ml-2" th:unless="${product.quantity} == 0">

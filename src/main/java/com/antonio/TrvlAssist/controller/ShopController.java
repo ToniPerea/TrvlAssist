@@ -22,16 +22,9 @@ public class ShopController {
 
     @Autowired
     private final UserService userService;
-    public ShopController(UserService userService, MainService mainService) {
-        this.userService = userService;
-        this.mainService = mainService;
-    }
-
-
     @Autowired
     private final MainService mainService;
 
-    
 
     @GetMapping
     public String showShop(Model model) {
@@ -89,7 +82,7 @@ public class ShopController {
         // tengo que borrar todos los productos del carrito para ese usuario
         mainService.removeAllShoppingCartForUser(miCarrito, userService.getAuthenticatedUser());
 
-        return "redirect:/confirmation";
+        return "payment";
     }
 
 

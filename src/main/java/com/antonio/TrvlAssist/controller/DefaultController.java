@@ -17,10 +17,6 @@ public class DefaultController {
     private final UserService userService;
 
 
-    public DefaultController(UserService userService) {
-        this.userService = userService;
-    }
-
     @GetMapping("/")
     public String getIndex() {
 
@@ -33,8 +29,6 @@ public class DefaultController {
         System.out.println("Ensenio home");
         return "home";
     }
-
-    
 
     @GetMapping("/login")
     public String showLoginForm() {
