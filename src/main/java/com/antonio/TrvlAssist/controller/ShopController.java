@@ -22,9 +22,16 @@ public class ShopController {
 
     @Autowired
     private final UserService userService;
+    public ShopController(UserService userService, MainService mainService) {
+        this.userService = userService;
+        this.mainService = mainService;
+    }
+
+
     @Autowired
     private final MainService mainService;
 
+    
 
     @GetMapping
     public String showShop(Model model) {

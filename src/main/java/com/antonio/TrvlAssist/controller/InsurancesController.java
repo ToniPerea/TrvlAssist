@@ -14,6 +14,12 @@ import org.springframework.web.bind.annotation.*;
 public class InsurancesController {
 
     private final MainService mainService;
+    public InsurancesController(MainService mainService, UserService userService) {
+        this.mainService = mainService;
+        this.userService = userService;
+    }
+
+
     private final UserService userService;
 
     @GetMapping
